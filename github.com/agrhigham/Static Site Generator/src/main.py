@@ -1,12 +1,12 @@
-from textnode import TextNode
+from src.leafnode import LeafNode
 
 def main():
-    # Create a TextNode object
-    dummy_node = TextNode("This is a text node", "bold", "https://www.boot.dev")
-    
-    # Print the TextNode object
-    print(dummy_node)
+    # Create a LeafNode instance
+    paragraph = LeafNode("p", "This is a paragraph of text.")
+    print(paragraph.to_html())
+    # Output: <p>This is a paragraph of text.</p>
 
-# Execute the main function
-if __name__ == "__main__":
-    main()
+    # Creating an anchor LeafNode with attributes
+    link = LeafNode("a", "Click me!", {"href": "https://www.google.com"})
+    print(link.to_html())
+    # Output: <a href
