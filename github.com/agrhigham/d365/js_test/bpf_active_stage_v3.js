@@ -1,19 +1,21 @@
-function GetSet(executionContext) {
-
+function UpdateDescriptionWithActiveStage(executionContext) {
     var formContext = executionContext.getFormContext();
+    
+    // Function to set the description field with the name of the active stage
+    function setActiveStageName() {
+        var activeStage = formContext.data.process.getActiveStage();
+        
+        if (activeStage) {
+            var activeStageName = activeStage.getName();
+            formContext.getAttribute("description").setValue(activeStageName);
+        }
+    }
 
-    var active_stage = formContext.data.process.getActiveStage();
+    // Set the description field on form load
+    setActiveStageName();
 
-    var string = active_stage.getName();
-
-    formContext.getAttribute("description").setValue(string);
-
-    formContext.data.process.addOnStageChange(function (set_stage) {
-
-        var active_stage = formContext.data.process.getActiveStage();
-
-        var string = active_stage.getName();
-
-        formContext.getAttribute("description").setValue(string);
+    // Add an event listener for stage change, and update the description field
+    formContext.data.process.addOnStageChange(function() {
+        setActiveStageName();
     });
 }
