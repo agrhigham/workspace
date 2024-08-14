@@ -1,6 +1,7 @@
 function AddScore(executionContext) {
     var formContext = executionContext.getFormContext();
     var total_score = 0;
+    var total_questions = 0;
 
     // Fetch and check 'arth_professionalgreeting' attribute
     var professionalAttr = formContext.getAttribute("arth_professionalgreeting");
@@ -15,10 +16,19 @@ function AddScore(executionContext) {
         total_score += 1;
     }
 
+    if (professional === "Yes" || professional === "No") {
+        total_questions += 1
+    }
+
     if (data_policy === "Yes") {  
         total_score += 1;
     }
 
-    // Setting the score, converting to string if needed
-    formContext.getAttribute("arth_score").setValue(total_score.toString());
+    if (data_policy === "Yes" || data_policy === "No") {
+        total_questions += 1
+    }
+
+    
+    formContext.getAttribute("arth_individualscore").setValue(total_score);
+    formContext.getAttribute("arth_questionsanswered").setValue(total_questions);
 }
